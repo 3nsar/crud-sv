@@ -145,5 +145,7 @@
 </ul>
 
 <style>
-    
+    h1{
+        font-weight: 800;
+    }
 </style>
