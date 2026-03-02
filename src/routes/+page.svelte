@@ -82,7 +82,7 @@
   // DELETE
   // -----------------------
   async function deletePost(id: number): Promise<void> {
-    const confirmDelete = confirm('Wirklich löschen?');
+    const confirmDelete = confirm('Delete?');
     if (!confirmDelete) return;
 
     const { error } = await supabase
@@ -143,3 +143,7 @@
     </li>
   {/each}
 </ul>
+
+<style>
+    
+</style>
