@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { supabase } from '$lib/supabase';
 
+
   // -----------------------
   // Type Definition
   // -----------------------
@@ -101,19 +102,20 @@
   onMount(loadPosts);
 </script>
 
+
+<div class="posts-container">
+
+<div class="posts-content">
 <h1>Posts</h1>
 
-<div style="margin-bottom: 20px;">
   <input
     bind:value={title}
     placeholder="Titel"
-    style="display:block; margin-bottom:10px;"
   />
 
   <textarea
     bind:value={content}
     placeholder="Inhalt"
-    style="display:block; margin-bottom:10px;"
   ></textarea>
 
   <button on:click={createPost}>
@@ -124,7 +126,7 @@
 {#if loading}
   <p>Lade...</p>
 {/if}
-
+<div class="posts-content">
 <ul>
   {#each posts as post (post.id)}
     <li style="margin-bottom: 10px;">
@@ -143,7 +145,24 @@
     </li>
   {/each}
 </ul>
+</div>
 <a href="/">go back</a>
-<style>
+</div>
+
+<style  lang="scss">
+.posts-container{
+    display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+  min-height: 100vh;
+  padding: 50px;
+}
+.posts-content{
+      display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 
 </style>
