@@ -106,33 +106,34 @@
 <div class="posts-container">
 
 <div class="posts-content">
-<h1>Posts</h1>
+
 
   <input
     bind:value={title}
-    placeholder="Titel"
+    placeholder="Titel..."
+    class="title"
   />
 
   <textarea
     bind:value={content}
-    placeholder="Inhalt"
+    placeholder="Write something..."
+    class="area-text"
   ></textarea>
 
-  <button on:click={createPost}>
-    Speichern
+  <button class="create-btn" on:click={createPost}>
+    Create Post
   </button>
 </div>
 
-{#if loading}
-  <p>Lade...</p>
-{/if}
+
 <div class="posts-content">
 <ul>
   {#each posts as post (post.id)}
+  <div class="posts-div">
     <li style="margin-bottom: 10px;">
-      <b>{post.title}</b>
+      <span class="post-title">{post.title}</span>
       <br />
-      {post.content}
+      <span>{post.content}</span>
       <br />
 
       <button on:click={() => updatePost(post.id)}>
@@ -143,13 +144,24 @@
         ❌ Delete
       </button>
     </li>
+    </div>
   {/each}
 </ul>
 </div>
-<a href="/">go back</a>
+<a class="btn-back" href="/">go back</a>
 </div>
 
 <style  lang="scss">
+
+.btn-back {
+  background-color: black;
+  text-decoration: none;
+  color: #c75d06;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
 .posts-container{
     display: flex;
   align-items: flex-start;
@@ -159,10 +171,64 @@
   padding: 50px;
 }
 .posts-content{
-      display: flex;
+
+  display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-right: 40px;
+
+  .title{
+      margin-top: 10px;
+     width: 300px;
+    height: 50px;
+    color:black;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .area-text{
+    margin-top: 10px;
+    width: 300px;
+    height: 300px;
+    color:black;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .posts-div{
+    background-color: #02013b;
+    padding: 20px;
+    width: 400px;
+    margin: 10px 0 0 0;
+
+    button{
+      margin-top: 20px;
+      background-color: black;
+      padding: 5px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  .post-title{
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+
+  .create-btn{
+    margin-top: 10px;
+     cursor: pointer;
+    background-color: #c75d06;
+    padding: 12px;
+    font-size: 20px;
+    border: none;
+    font-weight: 700;
+    border-radius: 20px;
+    @media (max-width: 600px) {
+      font-size: 15px;
+    }
+  }
 }
 
 </style>
