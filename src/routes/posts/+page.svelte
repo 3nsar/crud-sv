@@ -16,13 +16,13 @@
   let posts: Post[] = [];
   let title: string = '';
   let content: string = '';
-  let loading: boolean = false;
+
 
   // -----------------------
   // READ
   // -----------------------
   async function loadPosts(): Promise<void> {
-    loading = true;
+ 
 
     const { data, error } = await supabase
       .from('posts')
@@ -30,27 +30,28 @@
       .order('created_at', { ascending: false });
 
     if (error) {
-      console.error('Fehler beim Laden:', error.message);
+      console.error('error', error.message);
       posts = [];
     } else {
       posts = data ?? [];
     }
 
-    loading = false;
   }
 
   // -----------------------
   // CREATE
   // -----------------------
   async function createPost(): Promise<void> {
-    if (!title || !content) return;
-
+    if (!title || !content){
+      alert('Bitte alles ausfuellen!');
+      return ;
+    }
     const { error } = await supabase
       .from('posts')
       .insert([{ title, content }]);
 
     if (error) {
-      console.error('Fehler beim Erstellen:', error.message);
+      console.error('error', error.message);
       return;
     }
 
@@ -72,7 +73,7 @@
       .eq('id', id);
 
     if (error) {
-      console.error('Fehler beim Updaten:', error.message);
+      console.error('error', error.message);
       return;
     }
 
@@ -92,7 +93,7 @@
       .eq('id', id);
 
     if (error) {
-      console.error('Fehler beim Löschen:', error.message);
+      console.error('error', error.message);
       return;
     }
 
@@ -148,7 +149,7 @@
   {/each}
 </ul>
 </div>
-<a class="btn-back" href="/">go back</a>
+<a class="btn-back" href="/">Go back 👋</a>
 </div>
 
 <style  lang="scss">
@@ -156,7 +157,7 @@
 .btn-back {
   background-color: black;
   text-decoration: none;
-  color: #c75d06;
+  color: #dadada;
   font-weight: bold;
   padding: 10px 20px;
   border-radius: 10px;
